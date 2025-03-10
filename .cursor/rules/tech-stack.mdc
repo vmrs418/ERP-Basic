@@ -1,0 +1,24 @@
+---
+description: This is the project's Tech Stack
+globs: 
+alwaysApply: false
+---
+
+# Technical Stack
+
+- Node.js with TypeScript for the backend
+- React with Next.js for the frontend
+- PostgreSQL databases (via Supabase), never JSON file storage
+- Separate databases for dev, test, and prod environments
+- Redis for caching and performance optimization
+- Supabase for authentication and database management
+- Elasticsearch for advanced search capabilities, using elastic.co hosting
+- Elastic.co will have dev and prod indexes
+- TypeScript tests for both frontend and backend
+- NestJS as the backend framework for enterprise architecture
+- RESTful API architecture with domain-driven design
+- React Context + SWR for frontend state management
+- Document storage via Supabase Storage with CDN
+- CI/CD pipelines for automated testing and deployment
+- Monorepo structure using NX or Turborepo
+- ESLint and Prettier for code quality and formatting

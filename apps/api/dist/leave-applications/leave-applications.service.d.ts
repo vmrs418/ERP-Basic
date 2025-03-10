@@ -1,0 +1,61 @@
+import { Repository } from 'typeorm';
+import { LeaveApplication } from '../app/leave-applications/entities/leave-application.entity';
+import { CreateLeaveApplicationDto } from '../app/leave-applications/dto/create-leave-application.dto';
+import { UpdateLeaveApplicationDto } from '../app/leave-applications/dto/update-leave-application.dto';
+import { LeaveApprovalWorkflowsService } from '../app/leave-approval-workflows/leave-approval-workflows.service';
+import { EmployeeLeaveBalancesService } from '../app/employee-leave-balances/employee-leave-balances.service';
+export declare class LeaveApplicationsService {
+    private readonly leaveApplicationRepository;
+    private readonly leaveApprovalWorkflowService;
+    private readonly employeeLeaveBalancesService;
+    constructor(leaveApplicationRepository: Repository<LeaveApplication>, leaveApprovalWorkflowService: LeaveApprovalWorkflowsService, employeeLeaveBalancesService: EmployeeLeaveBalancesService);
+    create(createLeaveApplicationDto: CreateLeaveApplicationDto, createdById: string): Promise<LeaveApplication>;
+    findAll(filters: {
+        employeeId?: string;
+        status?: string;
+    }): Promise<LeaveApplication[]>;
+    findOne(id: string): Promise<LeaveApplication>;
+    update(id: string, updateLeaveApplicationDto: UpdateLeaveApplicationDto, updatedById: string): Promise<{
+        updated_by: string;
+        actioned_by?: string;
+        status: string;
+        rejection_reason?: string;
+        employee_id: string;
+        leave_type_id: string;
+        from_date: Date;
+        to_date: Date;
+        duration_days: number;
+        first_day_half: boolean;
+        last_day_half: boolean;
+        reason: string;
+        contact_during_leave: string;
+        handover_to?: string;
+        handover_notes?: string;
+        attachment_url?: string;
+        id: string;
+        applied_at: Date;
+        actioned_at?: Date;
+        created_by: string;
+        approved_by: string;
+        rejected_by: string;
+        cancelled_by: string;
+        approved_at: Date;
+        rejected_at: Date;
+        cancelled_at: Date;
+        created_at: Date;
+        updated_at: Date;
+        employee: import("../app/employees/entities/employee.entity").Employee;
+        leave_type: import("../app/leave-types/entities/leave-type.entity").LeaveType;
+        approver?: import("../app/users/entities/user.entity").User;
+        approval_workflow: import("../app/leave-approval-workflows/entities/leave-approval-workflow.entity").LeaveApprovalWorkflow[];
+    } & LeaveApplication>;
+    remove(id: string): Promise<LeaveApplication>;
+    approve(id: string, approverId: string): Promise<LeaveApplication | {
+        message: string;
+    }>;
+    reject(id: string, rejectionReason: string, rejecterId: string): Promise<LeaveApplication>;
+    cancel(id: string, user: any): Promise<LeaveApplication>;
+    findByEmployee(employeeId: string): Promise<LeaveApplication[]>;
+    findPendingForApproval(): Promise<LeaveApplication[]>;
+    findPendingForUser(approverId: string): Promise<import("../app/leave-approval-workflows/entities/leave-approval-workflow.entity").LeaveApprovalWorkflow[]>;
+}
